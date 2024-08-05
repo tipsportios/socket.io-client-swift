@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "Starscream",
-        "repositoryURL": "https://github.com/mignick/Starscream",
+        "repositoryURL": "https://github.com/tipsportios/Starscream",
         "state": {
-          "branch": null,
-          "revision": "ac6c0fc9da221873e01bd1a0d4818498a71eef33",
-          "version": "4.0.6"
+          "branch": "certs",
+          "revision": "a3dbc9d35b16deae52371538017403460ae778f3",
+          "version": null
         }
       }
     ]

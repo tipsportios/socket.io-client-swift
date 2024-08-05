@@ -152,6 +152,8 @@ open class SocketEngine: NSObject, WebSocketDelegate, URLSessionDelegate,
     private var probeWait = ProbeWaitQueue()
     private var secure = false
     private var certPinner: CertificatePinning?
+    private var clientCredential: URLCredential?
+    private var socksProxy: String?
     private var selfSigned = false
 
     // MARK: Initializers
@@ -312,7 +314,7 @@ open class SocketEngine: NSObject, WebSocketDelegate, URLSessionDelegate,
             includingCookies: session?.configuration.httpCookieStorage?.cookies(for: urlPollingWithSid)
         )
 
-        ws = WebSocket(request: req, certPinner: certPinner, compressionHandler: compress ? WSCompression() : nil, useCustomEngine: useCustomEngine)
+        ws = WebSocket(request: req, certPinner: certPinner, clientCredential: clientCredential, socksProxy: socksProxy, compressionHandler: compress ? WSCompression() : nil, useCustomEngine: useCustomEngine, sessionDelegate: sessionDelegate)
         ws?.callbackQueue = engineQueue
         ws?.delegate = self
 
@@ -625,6 +627,10 @@ open class SocketEngine: NSObject, WebSocketDelegate, URLSessionDelegate,
                 self.selfSigned = selfSigned
             case let .security(pinner):
                 self.certPinner = pinner
+            case let .clientCredential(credential):
+                self.clientCredential = credential
+            case let .socksProxy(proxy):
+                self.socksProxy = proxy
             case .compress:
                 self.compress = true
             case .enableSOCKSProxy:

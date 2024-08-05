@@ -43,6 +43,9 @@ public enum SocketIOClientOption : ClientOption {
     /// If given, the WebSocket transport will attempt to use compression.
     case compress
 
+    /// Clients certificate
+    case clientCredential(URLCredential)
+
     /// A dictionary of GET parameters that will be included in the connect url.
     case connectParams([String: Any])
 
@@ -108,6 +111,9 @@ public enum SocketIOClientOption : ClientOption {
     /// Sets an NSURLSessionDelegate for the underlying engine. Useful if you need to handle self-signed certs.
     case sessionDelegate(URLSessionDelegate)
 
+    /// socks proxy ip:port
+    case socksProxy(String?)
+
     /// If passed `false`, the WebSocket stream will be configured with the useCustomEngine `false`.
     case useCustomEngine(Bool)
 
@@ -123,6 +129,8 @@ public enum SocketIOClientOption : ClientOption {
         switch self {
         case .compress:
             description = "compress"
+        case .clientCredential:
+            description = "clientCredential"
         case .connectParams:
             description = "connectParams"
         case .cookies:
@@ -161,6 +169,8 @@ public enum SocketIOClientOption : ClientOption {
             description = "security"
         case .sessionDelegate:
             description = "sessionDelegate"
+        case .socksProxy:
+            description = "socksProxy"
         case .enableSOCKSProxy:
             description = "enableSOCKSProxy"
         case .useCustomEngine:
@@ -178,6 +188,8 @@ public enum SocketIOClientOption : ClientOption {
         switch self {
         case .compress:
             value = true
+        case let .clientCredential(credential):
+            value = credential
         case let .connectParams(params):
             value = params
         case let .cookies(cookies):
@@ -216,6 +228,8 @@ public enum SocketIOClientOption : ClientOption {
             value = signed
         case let .sessionDelegate(delegate):
             value = delegate
+        case let .socksProxy(proxy):
+            value = proxy
         case let .enableSOCKSProxy(enable):
             value = enable
         case let .useCustomEngine(enable):
