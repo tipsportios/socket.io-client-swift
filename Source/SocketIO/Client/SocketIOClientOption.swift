@@ -111,7 +111,7 @@ public enum SocketIOClientOption : ClientOption {
     /// Sets an NSURLSessionDelegate for the underlying engine. Useful if you need to handle self-signed certs.
     case sessionDelegate(URLSessionDelegate)
 
-    /// socks proxy ip:port
+    /// socks proxy with format text:ip:port
     case socksProxy(String?)
 
     /// If passed `false`, the WebSocket stream will be configured with the useCustomEngine `false`.

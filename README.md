@@ -3,6 +3,12 @@
 # Socket.IO-Client-Swift
 Socket.IO-client for iOS/OS X.
 
+# Custom options
+
+- clientCredential(URLCredential) - support for clients certificate
+- socksProxy(String?) - socks proxy address in a format "name:ip:port"
+
+
 ## Example
 ```swift
 import SocketIO
