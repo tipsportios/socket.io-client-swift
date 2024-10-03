@@ -221,7 +221,7 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
             payloadStr = jsonString
         }
 
-        engine?.send("0\(socket.nsp),\(payloadStr)", withData: [])
+        engine?.send("0\(socket.nsp)\(payloadStr.isEmpty ? "" : ",\(payloadStr)")", withData: [])
     }
 
     /// Called when the manager has disconnected from socket.io.
@@ -249,7 +249,7 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter socket: The socket to disconnect.
     open func disconnectSocket(_ socket: SocketIOClient) {
-        engine?.send("1\(socket.nsp),", withData: [])
+        engine?.send("1\(socket.nsp)", withData: [])
 
         socket.didDisconnect(reason: "Namespace leave")
     }
