@@ -301,8 +301,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter reason: The reason that the engine closed.
     open func engineDidClose(reason: String) {
-        handleQueue.async {
-            self._engineDidClose(reason: reason)
+        handleQueue.async { [weak self] in
+            self?._engineDidClose(reason: reason)
         }
     }
 
@@ -325,8 +325,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter reason: The reason the engine errored.
     open func engineDidError(reason: String) {
-        handleQueue.async {
-            self._engineDidError(reason: reason)
+        handleQueue.async { [weak self] in
+            self?._engineDidError(reason: reason)
         }
     }
 
@@ -340,8 +340,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter reason: The reason the engine opened.
     open func engineDidOpen(reason: String) {
-        handleQueue.async {
-            self._engineDidOpen(reason: reason)
+        handleQueue.async { [weak self] in
+            self?._engineDidOpen(reason: reason)
         }
     }
 
@@ -365,8 +365,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
 
     /// Called when the engine receives a ping message.
     open func engineDidReceivePing() {
-        handleQueue.async {
-            self._engineDidReceivePing()
+        handleQueue.async { [weak self] in
+            self?._engineDidReceivePing()
         }
     }
 
@@ -376,8 +376,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
 
     /// Called when the sends a ping to the server.
     open func engineDidSendPing() {
-        handleQueue.async {
-            self._engineDidSendPing()
+        handleQueue.async { [weak self] in
+            self?._engineDidSendPing()
         }
     }
 
@@ -387,8 +387,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
 
     /// Called when the engine receives a pong message.
     open func engineDidReceivePong() {
-        handleQueue.async {
-            self._engineDidReceivePong()
+        handleQueue.async { [weak self] in
+            self?._engineDidReceivePong()
         }
     }
 
@@ -398,8 +398,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
 
     /// Called when the sends a pong to the server.
     open func engineDidSendPong() {
-        handleQueue.async {
-            self._engineDidSendPong()
+        handleQueue.async { [weak self] in
+            self?._engineDidSendPong()
         }
     }
 
@@ -417,8 +417,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter headers: The http headers.
     open func engineDidWebsocketUpgrade(headers: [String: String]) {
-        handleQueue.async {
-            self._engineDidWebsocketUpgrade(headers: headers)
+        handleQueue.async { [weak self] in
+            self?._engineDidWebsocketUpgrade(headers: headers)
         }
     }
      private func _engineDidWebsocketUpgrade(headers: [String: String]) {
@@ -429,8 +429,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter msg: The message that needs parsing.
     open func parseEngineMessage(_ msg: String) {
-        handleQueue.async {
-            self._parseEngineMessage(msg)
+        handleQueue.async { [weak self] in
+            self?._parseEngineMessage(msg)
         }
     }
 
@@ -449,8 +449,8 @@ open class SocketManager: NSObject, SocketManagerSpec, SocketParsable, SocketDat
     ///
     /// - parameter data: The data the engine received.
     open func parseEngineBinaryData(_ data: Data) {
-        handleQueue.async {
-            self._parseEngineBinaryData(data)
+        handleQueue.async { [weak self] in
+            self?._parseEngineBinaryData(data)
         }
     }
 
